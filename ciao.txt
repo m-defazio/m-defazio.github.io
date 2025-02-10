@@ -1,0 +1,2 @@
+Questa è la versione alternativa del codice.
+Sei nel ramo alternative.
