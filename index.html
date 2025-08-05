@@ -1,78 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michele De Fazio - Cybersecurity Enthusiast</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: white;
-            text-align: center;
-        }
-        header {
-            padding: 20px;
-            background: linear-gradient(135deg, #6a0dad, #00ff00);
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        section {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.3);
-        }
-        h2 {
-            color: #6a0dad;
-            font-size: 1.8em;
-        }
-        p, ul {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        a {
-            color: #00ff00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 20px auto;
-            display: block;
-            border: 4px solid #6a0dad;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michele De Fazio - Cybersecurity Specialist</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0d0d0d;
+      overflow: hidden;
+      height: 100vh;
+      color: #f0f0f0;
+    }
+
+    #bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      max-width: 90vw;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 30px;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 25px rgba(114, 11, 116, 0.7);
+      text-align: center;
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #720b74;
+      margin-bottom: 15px;
+    }
+
+    .card h1 {
+      font-size: 1.8em;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .card h2 {
+      font-size: 1.1em;
+      color: #cccccc;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1em;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 15px 0 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.95em;
+      line-height: 1.4;
+      color: #dddddd;
+      margin-bottom: 10px;
+    }
+
+    .socials {
+      margin-top: 15px;
+    }
+
+    .socials a {
+      color: #f0f0f0;
+      margin: 0 10px;
+      font-size: 1.4em;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: #720b74;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Hi there, I'm Michele De Fazio! 👋</h1>
-        <h3>Cybersecurity & Software Engineering Enthusiast</h3>
-    </header>
-    <img src="/images/1739351846492.jpg" alt="Michele De Fazio" class="profile-img">
-    <section>
-        <p>I'm a Master's student in Computer Engineering at <strong>Università Federico II di Napoli</strong>, specializing in <strong>Cybersecurity</strong> at the Cyber Hackademy.</p>
-        <h2>🔍 What I'm Working On</h2>
-        <ul>
-            <li>Studying offensive and defensive security techniques 🏴‍☠️🛡️</li>
-            <li>Developing secure applications and penetration testing tools 🔐</li>
-            <li>Exploring AI & cybersecurity intersections 🤖</li>
-        </ul>
-        <h2>🚀 Skills & Technologies</h2>
-        <p><strong>Programming:</strong> C, C++, Java</p>
-        <p><strong>Tools & Frameworks:</strong> Kali Linux, Metasploit, Wireshark, Docker</p>
-        <p><strong>Other:</strong> Git, Linux, SSH</p>
-        <h2>📫 Let's Connect!</h2>
-        <p><a href="https://www.linkedin.com/in/michele-de-fazio-10a151227/" target="_blank">LinkedIn</a> | <a href="https://github.com/m-defazio" target="_blank">GitHub</a> | <a href="https://www.instagram.com/michkele_/" target="_blank">Instagram</a></p>
-        <p>💡 Always open to collaborations, projects, and cybersecurity discussions!</p>
-    </section>
+  <div id="bg"></div>
+
+  <div class="card">
+    <img src="images/1739351846492.jpg" alt="Michele De Fazio">
+    <h1>Michele De Fazio</h1>
+    <h2>Cybersecurity Specialist & Software Engineer</h2>
+
+    <div class="section-title"><i class="fas fa-user-circle"></i> About Me</div>
+    <p>Master’s student in Computer Engineering at Federico II, Naples. Specialized in cybersecurity at Cyber Hackademy.</p>
+
+    <div class="section-title"><i class="fas fa-code"></i> Skills</div>
+    <p>C, C++, Java, Git, Docker, Linux, SSH</p>
+
+    <div class="section-title"><i class="fas fa-toolbox"></i> Tools</div>
+    <p>Kali Linux, Metasploit, Wireshark, Burp Suite</p>
+
+    <div class="section-title"><i class="fas fa-lightbulb"></i> Interests</div>
+    <p>Ethical hacking, secure software, AI & security intersection</p>
+
+    <div class="socials">
+      <a href="https://github.com/m-defazio" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/michele-de-fazio-10a151227/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/michkele_/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <script>
+    // Geometric animation background
+    const bg = document.getElementById('bg');
+    const particles = [];
+
+    for (let i = 0; i < 50; i++) {
+      const el = document.createElement('div');
+      el.style.position = 'absolute';
+      el.style.width = el.style.height = `${Math.random() * 8 + 4}px`;
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      el.style.background = ['#720B74', '#666666', '#999999'][Math.floor(Math.random() * 3)];
+      el.style.opacity = 0.15 + Math.random() * 0.1;
+      el.style.top = `${Math.random() * 100}%`;
+      el.style.left = `${Math.random() * 100}%`;
+      el.dataset.dx = (Math.random() - 0.5) * 0.6;
+      el.dataset.dy = (Math.random() - 0.5) * 0.6;
+      bg.appendChild(el);
+      particles.push(el);
+    }
+
+    document.addEventListener('mousemove', e => {
+      const { clientX: x, clientY: y } = e;
+      particles.forEach(el => {
+        const dx = parseFloat(el.dataset.dx);
+        const dy = parseFloat(el.dataset.dy);
+        el.style.transform = `translate(${dx * x * 0.1}px, ${dy * y * 0.1}px)`;
+      });
+    });
+  </script>
 </body>
 </html>
