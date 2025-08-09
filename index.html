@@ -1,162 +1,472 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Michele De Fazio - Cybersecurity Specialist</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Michele De Fazio — Cyber Galaxy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="description" content="Studente magistrale in Ingegneria Informatica, specializzando in sicurezza informatica.">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root{
+      --bg-0: #04040a;
+      --bg-1: #0b0b12;
+      --accent-1: #7b0b8b;
+      --accent-2: #13c6d6;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+      --muted: #bfc6d1;
+      --card-radius: 18px;
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0d0d0d;
-      overflow: hidden;
-      height: 100vh;
-      color: #f0f0f0;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(123,11,139,0.12), transparent 6%),
+                  radial-gradient(900px 600px at 90% 90%, rgba(19,198,214,0.08), transparent 8%),
+                  linear-gradient(180deg,var(--bg-0),var(--bg-1));
+      color: #e9eef6;
+      overflow:auto; /* allow scrolling on mobile */
+      -webkit-font-smoothing:antialiased;
     }
 
-    #bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+    /* mobile menu button */
+    .mobile-menu{display:none}
+    .mobile-nav{display:none}
+
+    /* full-canvas network */
+    canvas#net{position:fixed;inset:0;z-index:0;display:block}
+
+    /* main layout */
+    .wrap{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
     }
 
-    .card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 500px;
-      max-width: 90vw;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      padding: 30px;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 25px rgba(114, 11, 116, 0.7);
-      text-align: center;
+    .panel{
+      width:980px;
+      max-width:96vw;
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap:24px;
+      align-items:start;
     }
 
-    .card img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #720b74;
-      margin-bottom: 15px;
+    /* left card */
+    .card-left{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--card-radius);
+      padding:28px;
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 40px rgba(114,11,116,0.06) inset;
+      border: 1px solid rgba(255,255,255,0.03);
+      position:relative;
+      overflow:hidden;
     }
 
-    .card h1 {
-      font-size: 1.8em;
-      color: #ffffff;
-      margin-bottom: 10px;
+    .avatar{
+      width:124px;height:124px;border-radius:50%;object-fit:cover;border:3px solid rgba(123,11,139,0.9);
+      display:block;margin:0 auto 16px;box-shadow:0 6px 18px rgba(11,7,18,0.6);
+    }
+    .name{font-size:1.4rem;font-weight:800;text-align:center;margin-bottom:6px}
+    .role{font-size:0.95rem;color:var(--muted);text-align:center;margin-bottom:14px}
+
+    .intro{
+      font-size:0.95rem;line-height:1.45;color:#dfe8f5;text-align:center;padding:8px 6px;margin-bottom:10px;min-height:48px;
     }
 
-    .card h2 {
-      font-size: 1.1em;
-      color: #cccccc;
-      margin-bottom: 20px;
+    .badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+    .badge{background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));padding:8px 12px;border-radius:999px;font-weight:600;font-size:0.85rem;border:1px solid rgba(255,255,255,0.03)}
+    .badge .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
+
+    /* right area */
+    .right{
+      display:flex;flex-direction:column;gap:16px;
     }
 
-    .section-title {
-      font-size: 1em;
-      font-weight: 600;
-      color: #ffffff;
-      margin: 15px 0 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
+    .glass-row{display:flex;gap:12px;align-items:center}
+
+    .card-glass{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 24px rgba(0,0,0,0.45);
     }
 
-    .card p {
-      font-size: 0.95em;
-      line-height: 1.4;
-      color: #dddddd;
-      margin-bottom: 10px;
+    .headline{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 2px;
+    }
+    .headline h3{margin:0;font-size:1.05rem}
+    .subtle{color:var(--muted);font-size:0.92rem}
+
+    /* accordion panels */
+    .accordion{margin-top:8px}
+    .accordion-item{overflow:hidden;border-radius:12px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.02)}
+    .accordion-btn{display:flex;align-items:center;gap:12px;padding:14px;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.01));cursor:pointer}
+    .accordion-btn h4{margin:0;font-size:0.98rem}
+    .accordion-btn .chev{margin-left:auto;transition:transform .28s ease}
+    .acc-body{padding:12px 14px;background:linear-gradient(180deg, rgba(10,10,12,0.02), transparent)}
+
+    /* skills grid */
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill{position:relative;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);min-width:110px;text-align:center;font-weight:600}
+    .skill:hover{transform:translateY(-6px);transition:transform .25s cubic-bezier(.2,.9,.3,1)}
+    .skill .mini{display:block;font-size:0.78rem;color:var(--muted);font-weight:500;margin-top:6px}
+
+    /* tools list */
+    .tools{display:flex;flex-wrap:wrap;gap:8px}
+    .tool{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-weight:600;font-size:0.9rem}
+
+    /* footer socials */
+    .socials{display:flex;gap:12px;justify-content:flex-end}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);transition:transform .2s ease}
+    .socials a:hover{transform:translateY(-6px)}
+
+    /* micro interactions */
+    .glow{position:absolute;right:-120px;top:-120px;width:320px;height:320px;border-radius:50%;filter:blur(80px);opacity:0.08;background:radial-gradient(circle at 30% 30%, var(--accent-1), transparent 30%);pointer-events:none}
+
+    /* responsive adjustments */
+    @media (max-width:880px){
+      .panel{grid-template-columns:1fr;}
+      .card-left{padding:18px;border-radius:14px}
+      .avatar{width:96px;height:96px}
+      .name{font-size:1.2rem}
+      .role{font-size:0.9rem}
+      .intro{font-size:0.95rem}
+      .socials{justify-content:center}
+
+      /* show mobile menu */
+      .mobile-menu{display:flex;position:fixed;right:18px;top:18px;z-index:6;width:48px;height:48px;border-radius:12px;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04)}
+      .mobile-menu i{font-size:18px;color:#e9eef6}
+      .mobile-nav{display:none;position:fixed;right:18px;top:76px;z-index:6;background:linear-gradient(180deg, rgba(10,10,12,0.95), rgba(10,10,12,0.86));padding:10px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);}
+      .mobile-nav a{display:block;padding:8px 12px;color:#dfe8f5;text-decoration:none;border-radius:8px}
+      .mobile-nav a:hover{background:rgba(255,255,255,0.02)}
+
+      /* lower canvas workload on small screens */
+      canvas#net{filter:blur(0.2px)}
     }
 
-    .socials {
-      margin-top: 15px;
+    /* small playful footer */
+    .signature{font-size:0.82rem;color:var(--muted);text-align:center;margin-top:8px}
+
+    /* animated code-rain for hover (pure CSS pseudo) */
+    .skill:hover::after{
+      content:'';position:absolute;inset:0;border-radius:10px;pointer-events:none;background:linear-gradient(90deg, rgba(19,198,214,0.06), rgba(123,11,139,0.04));mix-blend-mode:screen
     }
 
-    .socials a {
-      color: #f0f0f0;
-      margin: 0 10px;
-      font-size: 1.4em;
-      transition: color 0.3s ease;
-    }
-
-    .socials a:hover {
-      color: #720b74;
-    }
   </style>
 </head>
 <body>
-  <div id="bg"></div>
+  <canvas id="net"></canvas>
 
-  <div class="card">
-    <img src="images/1739351846492.jpg" alt="Michele De Fazio">
-    <h1>Michele De Fazio</h1>
-    <h2>Cybersecurity Specialist & Software Engineer</h2>
+  <!-- mobile menu button -->
+  <button class="mobile-menu" id="mobileMenu" aria-label="Apri menu"><i class="fas fa-bars"></i></button>
+  <nav id="mobileNav" class="mobile-nav" aria-hidden="true">
+    <a href="#about">Chi sono</a>
+    <a href="#skills">Competenze</a>
+    <a href="#projects">Progetti</a>
+    <a href="#interests">Interessi</a>
+  </nav>
 
-    <div class="section-title"><i class="fas fa-user-circle"></i> About Me</div>
-    <p>Master’s student in Computer Engineering at Federico II, Naples. Specialized in cybersecurity at Cyber Hackademy.</p>
+  <div class="wrap">
+    <div class="panel">
+      <aside class="card-left">
+        <div class="glow"></div>
+        <img class="avatar" src="images/1739351846492.jpg" alt="Michele De Fazio">
+        <div class="name">Michele De Fazio</div>
+        <div class="role">Studente magistrale in Ingegneria Informatica — specializzando in sicurezza informatica</div>
+        <p class="intro"><span id="typed"></span><span id="cursor">▌</span></p>
 
-    <div class="section-title"><i class="fas fa-code"></i> Skills</div>
-    <p>C, C++, Java, Git, Docker, Linux, SSH</p>
+        <div class="badges" aria-hidden>
+          <div class="badge"><span class="dot" style="background:var(--accent-1)"></span>Student @ Federico II</div>
+          <div class="badge"><span class="dot" style="background:var(--accent-2)"></span>Cyber Hackademy</div>
+          <div class="badge"><span class="dot" style="background:#9bd27c"></span>Aspiring PenTester</div>
+        </div>
 
-    <div class="section-title"><i class="fas fa-toolbox"></i> Tools</div>
-    <p>Kali Linux, Metasploit, Wireshark, Burp Suite</p>
+        <div style="margin-top:18px">
+          <div class="headline"><h3>Contact</h3><div class="subtle">Always polite, sometimes sarcastic</div></div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:0.93rem"><span>Email</span><strong>michele@example.com</strong></div>
+            <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:0.93rem"><span>Location</span><strong>Napoli, IT</strong></div>
+          </div>
+        </div>
 
-    <div class="section-title"><i class="fas fa-lightbulb"></i> Interests</div>
-    <p>Ethical hacking, secure software, AI & security intersection</p>
+        <div style="margin-top:18px;display:flex;justify-content:center">
+          <div class="socials" aria-label="social links">
+            <a href="https://github.com/m-defazio" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/michele-de-fazio-10a151227/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/michkele_/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
 
-    <div class="socials">
-      <a href="https://github.com/m-defazio" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/michele-de-fazio-10a151227/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.instagram.com/michkele_/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <div class="signature">Built with ☕ and a dash of curiosity</div>
+      </aside>
+
+      <main class="right">
+        <div class="card-glass">
+          <div class="headline"><h3>About me</h3><div class="subtle">Short</div></div>
+          <p style="margin-top:10px;color:#dfe8f5;line-height:1.5">Studente magistrale in Ingegneria Informatica presso l'Università Federico II di Napoli, con specializzazione in sicurezza informatica. Ho frequentato la Cyber Hackademy, dove ho approfondito strumenti e metodologie pratiche per la cyber security. Attualmente sto costruendo competenze in diversi ambiti della sicurezza con l'obiettivo di diventare penetration tester.</p>
+        </div>
+
+        <div class="card-glass">
+          <div class="headline"><h3>Skills</h3><div class="subtle">Hands-on</div></div>
+          <div class="accordion" id="skills-acc">
+            <div class="accordion-item">
+              <button class="accordion-btn" data-target="s1"><span style="width:20px;text-align:center;opacity:0.9"><i class="fas fa-terminal"></i></span><h4>Languages &amp; Dev</h4><span class="chev"><i class="fas fa-chevron-down"></i></span></button>
+              <div class="acc-body" id="s1" style="display:none">
+                <div class="skills" aria-hidden>
+                  <div class="skill">C <span class="mini">Low-level</span></div>
+                  <div class="skill">C++ <span class="mini">Systems</span></div>
+                  <div class="skill">Java <span class="mini">Backend</span></div>
+                  <div class="skill">Python <span class="mini">Scripting</span></div>
+                  <div class="skill">Bash <span class="mini">Automation</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-btn" data-target="s2"><span style="width:20px;text-align:center;opacity:0.9"><i class="fas fa-network-wired"></i></span><h4>Infrastructure</h4><span class="chev"><i class="fas fa-chevron-down"></i></span></button>
+              <div class="acc-body" id="s2" style="display:none">
+                <div class="skills">
+                  <div class="skill">Docker <span class="mini">Containers</span></div>
+                  <div class="skill">Linux <span class="mini">Admin</span></div>
+                  <div class="skill">SSH <span class="mini">Ops</span></div>
+                  <div class="skill">Nginx <span class="mini">Reverse Proxy</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-btn" data-target="s3"><span style="width:20px;text-align:center;opacity:0.9"><i class="fas fa-shield-alt"></i></span><h4>Security</h4><span class="chev"><i class="fas fa-chevron-down"></i></span></button>
+              <div class="acc-body" id="s3" style="display:none">
+                <div class="skills">
+                  <div class="skill">PenTest <span class="mini">Web &amp; Net</span></div>
+                  <div class="skill">Forensics <span class="mini">Analysis</span></div>
+                  <div class="skill">Threat Intel <span class="mini">Automation</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="glass-row">
+          <div class="card-glass" style="flex:1">
+            <div class="headline"><h3>Tools</h3><div class="subtle">Favorites</div></div>
+            <div style="margin-top:10px" class="tools">
+              <div class="tool">Kali Linux</div>
+              <div class="tool">Metasploit</div>
+              <div class="tool">Wireshark</div>
+              <div class="tool">n8n</div>
+              <div class="tool">VSCode</div>
+            </div>
+          </div>
+
+          <div class="card-glass" style="width:220px">
+            <div class="headline"><h3>Interests</h3></div>
+            <p style="margin-top:8px;color:var(--muted);font-size:0.95rem">Trekking, Campeggio, Musica e Viaggi</p>
+          </div>
+        </div>
+
+        <div class="card-glass">
+          <div class="headline"><h3>Quick projects</h3><div class="subtle">Selected</div></div>
+          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+            <div class="tool">AI-Driven Phishing Email Triage</div>
+            <div class="tool">Jigsaw Ransomware Reverse Engineering</div>
+            <div class="tool">Local LLM Infrastructure with Open WebUI, Ollama & Nginx</div>
+            <div class="tool">Keycloak Integration with XACML/LDAP Access Control</div>
+          </div>
+        </div>
+
+      </main>
     </div>
   </div>
 
   <script>
-    // Geometric animation background
-    const bg = document.getElementById('bg');
-    const particles = [];
+    /* ------------------------------
+       Animated network canvas (responsive friendly)
+       ------------------------------ */
+    const canvas = document.getElementById('net');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
 
-    for (let i = 0; i < 50; i++) {
-      const el = document.createElement('div');
-      el.style.position = 'absolute';
-      el.style.width = el.style.height = `${Math.random() * 8 + 4}px`;
-      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-      el.style.background = ['#720B74', '#666666', '#999999'][Math.floor(Math.random() * 3)];
-      el.style.opacity = 0.15 + Math.random() * 0.1;
-      el.style.top = `${Math.random() * 100}%`;
-      el.style.left = `${Math.random() * 100}%`;
-      el.dataset.dx = (Math.random() - 0.5) * 0.6;
-      el.dataset.dy = (Math.random() - 0.5) * 0.6;
-      bg.appendChild(el);
-      particles.push(el);
+    const mouse = {x: w/2, y: h/2};
+    window.addEventListener('resize', () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; init(); });
+    window.addEventListener('mousemove', (e)=>{mouse.x=e.clientX;mouse.y=e.clientY});
+
+    const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+    class Node{
+      constructor(){
+        this.x = Math.random()*w;
+        this.y = Math.random()*h;
+        this.vx = (Math.random()-0.5)*0.2;
+        this.vy = (Math.random()-0.5)*0.2;
+        this.r = 1 + Math.random()*2.5;
+      }
+      update(){
+        // weaker mouse attraction on touch devices
+        const attractStrength = isTouch ? 0.0004 : 0.0008;
+        this.x += this.vx + (mouse.x - this.x) * attractStrength;
+        this.y += this.vy + (mouse.y - this.y) * attractStrength;
+        if(this.x<0) this.x = w; if(this.x>w) this.x=0;
+        if(this.y<0) this.y = h; if(this.y>h) this.y=0;
+      }
+      draw(){
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(123,11,139,0.9)';
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fill();
+      }
     }
 
-    document.addEventListener('mousemove', e => {
-      const { clientX: x, clientY: y } = e;
-      particles.forEach(el => {
-        const dx = parseFloat(el.dataset.dx);
-        const dy = parseFloat(el.dataset.dy);
-        el.style.transform = `translate(${dx * x * 0.1}px, ${dy * y * 0.1}px)`;
+    let nodes = [];
+    function init(){
+      nodes = [];
+      // scale node count with area but reduce for small devices
+      const area = w*h;
+      let base = Math.round(area/70000);
+      if (isTouch || innerWidth < 600) base = Math.max(8, Math.round(base*0.45));
+      else if (innerWidth < 900) base = Math.max(12, Math.round(base*0.7));
+      const count = Math.min(60, Math.max(8, base));
+      for(let i=0;i<count;i++) nodes.push(new Node());
+    }
+
+    function distance(a,b){
+      const dx=a.x-b.x, dy=a.y-b.y; return Math.sqrt(dx*dx+dy*dy);
+    }
+
+    function render(){
+      ctx.clearRect(0,0,w,h);
+      // subtle background overlay
+      ctx.fillStyle = 'rgba(6,6,10,0.06)';
+      ctx.fillRect(0,0,w,h);
+
+      // draw connections
+      for(let i=0;i<nodes.length;i++){
+        const A = nodes[i];
+        A.update();
+        A.draw();
+        for(let j=i+1;j<nodes.length;j++){
+          const B = nodes[j];
+          const d = distance(A,B);
+          if(d < 160){
+            const alpha = 1 - d/160;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(123,11,139,${alpha*0.12})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(A.x,A.y);
+            ctx.lineTo(B.x,B.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // gentle mouse attractor
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(19,198,214,0.05)';
+      ctx.arc(mouse.x,mouse.y,40,0,Math.PI*2);
+      ctx.fill();
+
+      requestAnimationFrame(render);
+    }
+
+    init(); render();
+
+    /* ------------------------------
+       Accordion interaction
+       ------------------------------ */
+    document.querySelectorAll('.accordion-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const target = document.getElementById(btn.dataset.target);
+        const open = target.style.display === 'block';
+        // close others in same accordion
+        const acc = btn.closest('.accordion');
+        acc.querySelectorAll('.acc-body').forEach(b=>b.style.display='none');
+        acc.querySelectorAll('.chev i').forEach(i=>i.style.transform='rotate(0deg)');
+        if(!open){
+          target.style.display='block';
+          btn.querySelector('.chev i').style.transform='rotate(180deg)';
+        }
       });
     });
+
+    /* subtle floating on small elements to add life */
+    const floatables = document.querySelectorAll('.skill, .tool, .badge');
+    floatables.forEach((el,i)=>{
+      el.animate([
+        {transform:'translateY(0px)'},
+        {transform:`translateY(${ (i%2? -6: 6) }px)`},
+        {transform:'translateY(0px)'}
+      ],{duration: 3800 + i*120,iterations: Infinity, easing:'ease-in-out'});
+    });
+
+    /* small reveal on load */
+    document.querySelectorAll('.card-left, .card-glass').forEach((el, idx)=>{
+      el.style.opacity = 0; el.style.transform = 'translateY(10px)';
+      setTimeout(()=>{ el.style.transition='opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)'; el.style.opacity=1; el.style.transform='translateY(0)'; }, 120*idx);
+    });
+
+    /* ------------------------------
+       Mobile menu toggle
+       ------------------------------ */
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNav = document.getElementById('mobileNav');
+    mobileMenu && mobileMenu.addEventListener('click', (e)=>{
+      const open = mobileNav.getAttribute('aria-hidden') === 'false';
+      mobileNav.setAttribute('aria-hidden', String(open));
+      mobileNav.style.display = open ? 'none' : 'flex';
+      mobileNav.classList.toggle('show');
+    });
+
+    // hide mobile nav when link clicked
+    document.querySelectorAll('#mobileNav a').forEach(a=>a.addEventListener('click', ()=>{ mobileNav.style.display='none'; mobileNav.setAttribute('aria-hidden','true'); }));
+
+    /* ------------------------------
+       Typed intro (terminal vibe)
+       ------------------------------ */
+    const typedEl = document.getElementById('typed');
+    const cursorEl = document.getElementById('cursor');
+    const lines = [
+      'Studente magistrale in Ingegneria Informatica — specializzando in sicurezza informatica.',
+      'Ho frequentato la Cyber Hackademy e sto costruendo competenze per diventare penetration tester.'
+    ];
+
+    let lineIndex = 0, charIndex = 0;
+    function type(){
+      if(lineIndex >= lines.length){ cursorEl.style.opacity = 0; return; }
+      const current = lines[lineIndex];
+      if(charIndex <= current.length){
+        typedEl.textContent = current.slice(0,charIndex);
+        charIndex++;
+        setTimeout(type, 26 + Math.random()*40);
+      } else {
+        // pause then next line on next paragraph
+        lineIndex++;
+        charIndex = 0;
+        if(lineIndex < lines.length){
+          typedEl.textContent += '\n';
+          // slight delay before next line
+          setTimeout(type, 420);
+        } else {
+          // finished
+          cursorEl.style.transition = 'opacity 0.4s';
+          setTimeout(()=>cursorEl.style.opacity = 0, 600);
+        }
+      }
+    }
+    // ensure typed element preserves line breaks
+    typedEl.style.whiteSpace = 'pre-wrap';
+    setTimeout(type, 600);
+
   </script>
 </body>
 </html>
