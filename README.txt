@@ -1,3 +1,3 @@
-Sito Web di Prova
+# Mio Sito Web
 
-Questo repository contiene il codice sorgente di un sito web di prova sviluppato per scopi di test e apprendimento.
+Questo repository contiene il codice sorgente del mio sito web personale.
